@@ -1,0 +1,124 @@
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mensagem do Dia — Gestão à Vista</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800&family=Montserrat:wght@400;700;800&family=Poppins:wght@400;700;800&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0b0f14; --fg:#ffffff; --muted:rgba(255,255,255,.8); --accent:#4f46e5; }
+    * { box-sizing:border-box; }
+    html, body { height:100%; }
+    body { margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans'; color:var(--fg); background:var(--bg); overflow:hidden; }
+    .root { position:relative; width:100%; height:100%; }
+    .bg { position:absolute; inset:0; background-size:cover; background-position:center; filter:brightness(.85); }
+    .overlay { position:absolute; inset:0; background: radial-gradient(100% 130% at 0% 0%, rgba(0,0,0,.65), rgba(0,0,0,.3)); }
+
+    .content { position:relative; z-index:2; width:100%; height:100%; display:grid; place-items:center; padding:4vh 6vw; }
+    .card { max-width:1000px; width:100%; border-radius:20px; padding:clamp(24px,6vh,64px); backdrop-filter:blur(6px); background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.2)); box-shadow:0 20px 60px rgba(0,0,0,.35); }
+    .quote { font-size:clamp(28px,4.8vw,64px); line-height:1.15; font-weight:800; letter-spacing:-0.02em; margin:0; text-wrap:balance; }
+    .muted { opacity:.85; font-weight:400; }
+    .accent { color:var(--accent); }
+    .date { margin-top:24px; font-size:clamp(14px,1.6vw,18px); opacity:.9; }
+
+    .layout-1 .card { text-align:center; }
+
+    .layout-2 .content { grid-template-columns:1fr 1.2fr; gap:4vw; align-items:center; }
+    .layout-2 .panel { background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.25)); border-radius:20px; padding:clamp(24px,6vh,64px); box-shadow:0 20px 60px rgba(0,0,0,.25); }
+    .layout-2 .quote { font-size:clamp(28px,4.5vw,58px); }
+
+    .layout-3 .card { background:#fff; color:#111; }
+    .layout-3 .quote { color:#111; }
+    .layout-3 .date { color:#333; }
+    .layout-3 .decor { position:absolute; border-radius:999px; filter:blur(50px); opacity:.35; }
+
+    .layout-4 .card { background:transparent; box-shadow:none; padding:0; }
+    .layout-4 .quote { font-size:clamp(36px,7vw,92px); line-height:1.02; text-transform:uppercase; }
+    .layout-4 .accent-bar { width:18vw; height:1.2vh; background:var(--accent); margin:2vh 0 3vh; border-radius:8px; }
+
+    .layout-5 .card { display:grid; grid-template-columns:auto 1fr; gap:3vw; align-items:center; }
+    .layout-5 .badge { width:clamp(80px,14vw,200px); aspect-ratio:1/1; border-radius:999px; background:radial-gradient(circle at 30% 30%, var(--accent), rgba(255,255,255,.15)); display:grid; place-items:center; font-weight:900; font-size:clamp(18px,3vw,36px); box-shadow: inset 0 0 50px rgba(255,255,255,.2), 0 20px 60px rgba(0,0,0,.35); }
+
+    .footer { position:absolute; bottom:1.8vh; left:2vw; right:2vw; display:flex; justify-content:space-between; align-items:center; font-size:clamp(12px,1.2vw,14px); opacity:.8; }
+    .logo-dot { width:10px; height:10px; border-radius:999px; background:var(--accent); box-shadow:0 0 20px var(--accent); margin-right:10px; display:inline-block; }
+  </style>
+</head>
+<body>
+  <div id="app" class="root layout-1">
+    <div id="bg" class="bg"></div>
+    <div class="overlay" id="overlay"></div>
+    <div class="content" id="content"></div>
+    <div class="footer"><span><span class="logo-dot"></span>Mensagem do Dia</span><span id="today"></span></div>
+  </div>
+
+  <script>
+  const MESSAGES = ["Acredite no processo: constância gera resultado.", "Pequenos avanços diários constroem grandes vitórias.", "Coragem é agir apesar do medo.", "Disciplina é liberdade aplicada ao dia a dia.", "Seu melhor hoje prepara um amanhã mais leve.", "Foco no que você controla: energia, atitude e esforço.", "Errar rápido, aprender rápido, melhorar sempre.", "O segredo do progresso é começar.", "Comprometa-se com a jornada, não só com a chegada.", "Feito é melhor que perfeito quando o perfeito não existe.", "A meta de hoje é ser 1% melhor que ontem.", "Escolha o próximo passo, não o próximo problema.", "Seja curioso: perguntas abrem caminhos.", "Consistência vence talento quando o talento não treina.", "Você é capaz de mais do que imagina.", "Resultados extraordinários vêm de hábitos ordinários.", "Gaste energia com soluções, não com desculpas.", "A sua presença muda o ambiente: traga o melhor de si.", "Gentileza e clareza aceleram qualquer projeto.", "Aprender é a vantagem competitiva mais sustentável.", "Trabalhe em silêncio, deixe seus resultados fazerem barulho.", "O próximo nível exige o próximo esforço.", "Planejar é decidir o que não faremos.", "Seja a pessoa que puxa a barra para cima.", "Procure o desconforto que faz crescer.", "Sua atitude é o anúncio do seu dia.", "Priorize o importante antes do urgente.", "O tempo recompensa quem o respeita.", "Peça feedback. É atalho de evolução.", "Padrões altos, coração leve.", "Progresso > perfeição.", "Diga não ao que te afasta do sim que importa.", "Pense grande, execute simples.", "Ideias sem execução continuam sendo ideias.", "O que você repete, você se torna.", "Qualidade é um hábito, não um evento.", "Comece onde está. Use o que tem. Faça o que pode.", "Clareza antes de velocidade.", "Ações falam a língua da prioridade.", "Sua constância é o seu superpoder.", "Avance mesmo quando ninguém estiver vendo.", "Você só precisa do primeiro passo agora.", "Às vezes o caminho mais rápido é mais devagar e com método.", "Trate cada entrega como sua assinatura.", "Simplificar é mostrar respeito pelo tempo dos outros.", "Seja dono do problema e parte da solução.", "Firmeza na meta, flexibilidade no método.", "Seja confiável: prometa menos, entregue mais.", "Excelência silenciosa, impacto evidente.", "Sonhe alto, ancore no concreto.", "Construa pontes, não muros.", "Seja intencional com seu tempo.", "O hábito te leva onde a motivação não sustenta.", "Escreva para pensar melhor.", "Pergunte: qual é o próximo passo mensurável?", "Cada problema carrega uma oportunidade de melhoria.", "Terminar bem também é uma competência.", "Comece pequeno, corrija rápido, escale o que funciona.", "Não terceirize a responsabilidade pelo seu crescimento.", "Escolha batalhas que valham sua energia.", "O hoje bem feito simplifica o amanhã.", "Acredite na potência do básico bem feito.", "Seja pontual com suas promessas.", "Agregue valor em cada interação.", "Padrão elevado atrai padrão elevado.", "Use dados para iluminar, não para complicar.", "Curiosidade + método = inovação útil.", "Pergunte ‘por quê?’ cinco vezes.", "Tire 10 minutos para planejar: o dia agradece.", "Atenção plena: faça uma coisa por vez.", "Seja claro ao pedir, generoso ao reconhecer.", "Crescimento começa fora da zona de conforto.", "O mapa não é o território: observe a realidade.", "Transforme feedback em combustível.", "Direção importa mais que velocidade.", "Comunique o contexto, não só a tarefa.", "Se algo é prioridade, agende no calendário.", "Pergunte o que é suficiente para agora.", "Estado de arte nasce de estado de atenção.", "Troque culpa por responsabilidade.", "Crie sistemas que te puxem para o certo.", "O difícil de hoje é o fácil de amanhã.", "Diga a verdade com tato e coragem.", "Construa relações antes de precisar delas.", "Aja com urgência tranquila.", "Seja parte do ritmo que organiza o time.", "Ambiente organizado, mente disponível.", "Não empilhe tarefas, desenhe prioridades.", "Tudo comunica: capriche nos detalhes.", "Energia é contagiosa: seja a boa influência.", "Defina ‘pronto’ antes de começar.", "Faça o básico extraordinariamente bem.", "Seja útil hoje a alguém do seu time.", "Você não precisa saber tudo, precisa aprender sempre.", "Abrace a responsabilidade pelos resultados.", "Pequenas vitórias mantêm o motor ligado.", "Quando cansar, descanse. Depois siga.", "Transparência economiza tempo.", "Compromisso é fazer mesmo sem vontade.", "Humildade para ouvir, coragem para decidir.", "Seja curioso com problemas e generoso com pessoas.", "Confiabilidade é construída em entregas.", "Talento abre portas; consistência mantém.", "Aja como proprietário do que entrega.", "Planeje, execute, aprenda, repita.", "O extra que você faz te destaca.", "Métricas guiam, propósito move.", "Vença a inércia: comece pelos 5 minutos.", "Seja explícito sobre expectativas.", "Menos ruído, mais resultado.", "Tempo é finito: trate-o como tesouro.", "Comunicação clara evita retrabalho.", "O que não se mede, não se melhora.", "Aperfeiçoe o processo, multiplique o impacto.", "O futuro é de quem aprende mais rápido.", "Mostre seu trabalho: torne visível o progresso.", "Boa preparação reduz metade dos problemas.", "Faça perguntas melhores, obtenha respostas melhores.", "Decida com dados e sabedoria prática.", "Marcos curtos, avanços contínuos."]; consistência mantém.", "Aja como proprietário do que entrega.", "Planeje, execute, aprenda, repita.", "O extra que você faz te destaca.", "Métricas guiam, propósito move.", "Vença a inércia: comece pelos 5 minutos.", "Seja explícito sobre expectativas.", "Menos ruído, mais resultado.", "Tempo é finito: trate-o como tesouro.", "Comunicação clara evita retrabalho.", "O que não se mede, não se melhora.", "Aperfeiçoe o processo, multiplique o impacto.", "O futuro é de quem aprende mais rápido.", "Mostre seu trabalho: torne visível o progresso.", "Boa preparação reduz metade dos problemas.", "Faça perguntas melhores, obtenha respostas melhores.", "Decida com dados e sabedoria prática.", "Marcos curtos, avanços contínuos.", "Seja o padrão que você gostaria de receber.", "Priorize qualidade de atenção, não tempo de cadeira.", "Releia antes de enviar.", "Faça hoje algo que seu eu futuro agradeça.", "Objetivos claros, energia direcionada.", "Entregue valor antes de pedir algo.", "Seu trabalho fala por você: deixe-o impecável.", "Responsabilidade radical com empatia.", "Corte o supérfluo, preserve o essencial.", "Seja aluno perpétuo do seu ofício.", "Peça ajuda cedo: é sinal de inteligência.", "Abrace o feedback como presente.", "Crie tempo para pensar."];
+  const FONTS = [
+    { family: 'Inter', css: "'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', Arial" },
+    { family: 'Montserrat', css: "'Montserrat', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial" },
+    { family: 'Poppins', css: "'Poppins', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial" },
+    { family: 'Playfair Display', css: "'Playfair Display', Georgia, 'Times New Roman', serif" }
+  ];
+  const PALETTES = [
+    ['#0b0f14', '#ffffff', '#4f46e5'],
+    ['#0b0b0b', '#f2f2f2', '#22d3ee'],
+    ['#0a0a1a', '#f8fafc', '#ef4444'],
+    ['#0a1410', '#e6f7f1', '#10b981'],
+    ['#150a1a', '#fdf4ff', '#a855f7'],
+    ['#0a0f1a', '#e6f1ff', '#3b82f6'],
+    ['#1a0a0a', '#fff7ed', '#f97316'],
+    ['#0a161a', '#ecfeff', '#14b8a6']
+  ];
+  const UNSPLASH_TOPICS = ['nature','abstract','gradient','geometric','sunrise','mountains','city','forest','ocean','bokeh','texture','minimal','pattern'];
+
+  const pad = (n) => String(n).padStart(2, '0');
+  function dateKey(d=new Date()) { return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+  function dayOfYear(d=new Date()) { const start = new Date(d.getFullYear(),0,0); return Math.floor((d-start)/86400000); }
+  function seededInt(seedStr, mod) { let h=2166136261; for (let i=0;i<seedStr.length;i++){ h^=seedStr.charCodeAt(i); h=Math.imul(h,16777619);} h=(h*1664525+1013904223)>>>0; return h%mod; }
+
+  function chooseForToday(){
+    const now=new Date();
+    const key=dateKey(now); const doy=dayOfYear(now); const weekday=now.getDay();
+    const msgIdx=seededInt(`${key}/msg`, MESSAGES.length);
+    const paletteIdx=seededInt(`${key}/pal`, PALETTES.length);
+    const fontIdx=seededInt(`${key}/font`, FONTS.length);
+    const topicIdx=seededInt(`${key}/img`, UNSPLASH_TOPICS.length);
+    let layout=1; if(weekday>=1 && weekday<=5) layout=weekday; else layout=1;
+    return { key, doy, weekday, msgIdx, paletteIdx, fontIdx, topicIdx, layout };
+  }
+
+  function applyTheme(s){ const p=PALETTES[s.paletteIdx]; document.documentElement.style.setProperty('--bg',p[0]); document.documentElement.style.setProperty('--fg',p[1]); document.documentElement.style.setProperty('--accent',p[2]); document.body.style.fontFamily=FONTS[s.fontIdx].css; }
+  function setBackground(s){ const t=UNSPLASH_TOPICS[s.topicIdx]; const url=`https://source.unsplash.com/1920x1080/?${encodeURIComponent(t)}&sig=${s.doy}`; document.getElementById('bg').style.backgroundImage=`url('${url}')`; }
+  function formatDatePT(d=new Date()){ const df=new Intl.DateTimeFormat('pt-BR',{weekday:'long',day:'2-digit',month:'long'}); let s=df.format(d); return s.charAt(0).toUpperCase()+s.slice(1); }
+
+  function render(s){
+    const root=document.getElementById('app'); root.className=`root layout-${s.layout}`;
+    const msg=MESSAGES[s.msgIdx]; const content=document.getElementById('content');
+    if(s.layout===1){
+      content.innerHTML=`<div class="card"><h1 class="quote"><span class="accent">Bom dia!</span> ${msg}</h1><div class="date">${formatDatePT()}</div></div>`;
+    } else if(s.layout===2){
+      content.innerHTML=`<div class="panel"><h1 class="quote">${msg}</h1><div class="date">${formatDatePT()}</div></div><div></div>`;
+    } else if(s.layout===3){
+      content.innerHTML=`<div class="card"><h1 class="quote">${msg}</h1><div class="date">${formatDatePT()}</div></div><div class="decor" style="top:10%; left:5%; width:30vw; height:30vh; background: var(--accent);"></div><div class="decor" style="bottom:5%; right:10%; width:26vw; height:26vh; background:#fff;"></div>`;
+    } else if(s.layout===4){
+      const parts=msg.split(' '); const mid=Math.ceil(parts.length/2); const first=parts.slice(0,mid).join(' '); const last=parts.slice(mid).join(' ');
+      content.innerHTML=`<div class="card"><div class="accent-bar"></div><h1 class="quote"><span class="accent">${first}</span> ${last}</h1><div class="date">${formatDatePT()}</div></div>`;
+    } else if(s.layout===5){
+      content.innerHTML=`<div class="card"><div class="badge">HOJE</div><div><h1 class="quote">${msg}</h1><div class="date">${formatDatePT()}</div></div></div>`;
+    }
+    document.getElementById('today').textContent=formatDatePT();
+  }
+
+  function refreshIfNewDay(){ const stored=localStorage.getItem('md-dia-key'); const nowKey=dateKey(); if(stored && stored!==nowKey){ location.reload(); }}
+
+  function main(){ const s=chooseForToday(); localStorage.setItem('md-dia-key', s.key); applyTheme(s); setBackground(s); render(s); setInterval(refreshIfNewDay, 5*60*1000); }
+  document.addEventListener('DOMContentLoaded', main);
+  </script>
+</body>
+</html>
